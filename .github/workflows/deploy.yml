@@ -46,12 +46,12 @@ jobs:
         run: npm ci # Use npm ci for faster, deterministic installs
       - name: Build with Astro
         run: |
-          npm run build -- --outDir ${{ steps.pages.outputs.base_path }}
-          touch ${{ steps.pages.outputs.base_path }}/.nojekyll
+          npm run build 
+          touch ./dist/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ steps.pages.outputs.base_path }}
+          path: ./dist
 
   deploy:
     environment:
