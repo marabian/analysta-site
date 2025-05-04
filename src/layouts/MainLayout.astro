@@ -43,7 +43,7 @@ const {
     </script>
   </head>
   <body>
-    <header class="absolute top-0 left-0 right-0 z-50 pt-4">
+    <header class="absolute md:fixed top-0 left-0 right-0 z-50 pt-4">
       <div class="container mx-auto px-4 md:px-6">
         <div
           class="flex justify-between items-center py-3 px-4 md:px-6 rounded-xl dark:bg-background/30 bg-white/80 backdrop-blur-xl dark:border-white/10 border border-black/10 dark:shadow-sm shadow-lg shadow-black/5"
@@ -110,7 +110,7 @@ const {
           </nav>
 
           <div class="flex items-center gap-4">
-            <!-- Theme Toggle Button (Sun/Moon) -->
+            <!-- Theme Toggle Button (Sun/Moon) - Hidden for now -->
             <!-- <button
               id="theme-toggle"
               class="p-2 rounded-full dark:bg-background/50 bg-black/5 hover:bg-primary/10 backdrop-blur-sm dark:border-white/10 border border-black/10 transition-colors"
@@ -148,26 +148,9 @@ const {
 
             <a
               href="#contact"
-              class="bg-primary/90 hover:bg-primary text-white px-6 py-2 rounded-full transition-colors hidden md:inline-block font-medium shadow-md shadow-primary/20 border border-primary/20"
+              class="bg-primary/90 hover:bg-primary text-white px-4 py-2 rounded-full transition-colors inline-block font-medium shadow-md shadow-primary/20 border border-primary/20 text-sm md:text-base md:px-6"
               >Get in Touch</a
             >
-            <button
-              class="p-2 md:hidden dark:bg-background/50 bg-black/5 rounded-full dark:border-white/10 border border-black/10"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
-              </svg>
-            </button>
           </div>
         </div>
       </div>
@@ -181,36 +164,98 @@ const {
       .pill-link[data-active="true"] {
         @apply text-foreground;
       }
+      
+      .mobile-nav-link {
+        @apply text-foreground/60 transition-colors duration-200;
+      }
+
+      .mobile-nav-link[data-active="true"] {
+        @apply text-primary font-medium;
+      }
+
+      .mobile-nav-link[data-active="true"] svg {
+        @apply text-primary;
+      }
+
+      .mobile-nav-link[data-active="true"] div {
+        @apply bg-primary/10 border border-primary/20;
+      }
+      
+      /* Ensure all nav links have same active styling */
+      .mobile-nav-link[href="#contact"][data-active="true"] div {
+        @apply bg-primary/10 border border-primary/20;
+      }
+      
+      /* Add subtle transition effects for mobile nav */
+      .mobile-nav-link svg {
+        @apply transition-transform duration-200 ease-in-out;
+      }
+      
+      .mobile-nav-link:active svg {
+        @apply scale-90;
+      }
     </style>
 
     <script is:inline>
       document.addEventListener("DOMContentLoaded", () => {
         const pillLinks = document.querySelectorAll(".pill-link");
+        const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
         const indicator = document.getElementById("pill-indicator");
 
         function updateIndicator(elem) {
-          // Set all links to inactive
+          // Set all desktop links to inactive
           pillLinks.forEach((link) =>
             link.setAttribute("data-active", "false")
           );
 
-          // Set current link to active
+          // Set current desktop link to active
           elem.setAttribute("data-active", "true");
 
           // Position the indicator
           indicator.style.width = `${elem.offsetWidth}px`;
           indicator.style.left = `${elem.offsetLeft}px`;
         }
+        
+        function updateMobileNav(hash) {
+          // Set all mobile links to inactive
+          mobileNavLinks.forEach((link) => {
+            link.setAttribute("data-active", "false");
+          });
+          
+          // Find and activate the corresponding mobile link
+          const activeMobileLink = Array.from(mobileNavLinks).find(
+            link => link.getAttribute("href") === hash
+          );
+          
+          if (activeMobileLink) {
+            activeMobileLink.setAttribute("data-active", "true");
+          }
+        }
 
-        // Set initial state to first item
+        // Set initial state to first item for desktop
         if (pillLinks.length > 0) {
           updateIndicator(pillLinks[0]);
         }
 
-        // Add click handlers
+        // Add click handlers for desktop
         pillLinks.forEach((link) => {
           link.addEventListener("click", (e) => {
             updateIndicator(e.currentTarget);
+            updateMobileNav(e.currentTarget.getAttribute("href"));
+          });
+        });
+        
+        // Add click handlers for mobile
+        mobileNavLinks.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            const hash = e.currentTarget.getAttribute("href");
+            updateMobileNav(hash);
+            
+            // Also update desktop nav if applicable
+            const desktopLink = document.querySelector(`.pill-link[href="${hash}"]`);
+            if (desktopLink) {
+              updateIndicator(desktopLink);
+            }
           });
         });
 
@@ -218,10 +263,12 @@ const {
         function checkHash() {
           const hash = window.location.hash;
           if (hash) {
-            const activeLink = document.querySelector(`a[href="${hash}"]`);
-            if (activeLink && activeLink.classList.contains("pill-link")) {
-              updateIndicator(activeLink);
+            const activeDesktopLink = document.querySelector(`.pill-link[href="${hash}"]`);
+            if (activeDesktopLink) {
+              updateIndicator(activeDesktopLink);
             }
+            
+            updateMobileNav(hash);
           }
         }
 
@@ -234,7 +281,47 @@ const {
       <slot />
     </main>
 
-    <footer class="mt-20 relative overflow-hidden pt-16 pb-10">
+    <!-- Mobile Bottom Navigation -->
+    <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden">
+      <div class="container px-4 mx-auto pb-4">
+        <nav class="bg-background/95 backdrop-blur-xl border border-white/10 shadow-lg rounded-2xl py-3 px-6">
+          <ul class="flex justify-around items-center">
+            <li>
+              <a href="#services" class="mobile-nav-link flex flex-col items-center" data-active="false">
+                <div class="bg-background/80 p-2 rounded-full flex items-center justify-center border border-white/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                  </svg>
+                </div>
+                <span class="text-xs mt-1">Services</span>
+              </a>
+            </li>
+            <li>
+              <a href="#about" class="mobile-nav-link flex flex-col items-center" data-active="false">
+                <div class="bg-background/80 p-2 rounded-full flex items-center justify-center border border-white/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                  </svg>
+                </div>
+                <span class="text-xs mt-1">About</span>
+              </a>
+            </li>
+            <li>
+              <a href="#contact" class="mobile-nav-link flex flex-col items-center" data-active="false">
+                <div class="bg-background/80 p-2 rounded-full flex items-center justify-center border border-white/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+                  </svg>
+                </div>
+                <span class="text-xs mt-1">Contact</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <footer class="mt-20 relative overflow-hidden pt-16 pb-28 md:pb-10">
       <!-- Background Elements -->
       <div
         class="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background/95 to-primary/5"
