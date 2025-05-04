@@ -7,5 +7,5 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   integrations: [tailwind(), react()],
   site: "https://marabian.github.io",
-  base: "/analysta-site/",
+  // Remove the base path to serve from root
 });
