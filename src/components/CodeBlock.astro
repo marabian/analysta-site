@@ -1,0 +1,24 @@
+---
+// CodeBlock.astro
+interface Props {
+  language?: string;
+  code: string;
+}
+
+const { language = "swift", code } = Astro.props;
+---
+
+<pre><code class={`language-${language}`} set:html={code}></code></pre>
+
+<style>
+  pre {
+    @apply bg-background rounded-md shadow-sm border border-border/50 overflow-x-auto;
+    padding: 1rem;
+  }
+  
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+</style>
