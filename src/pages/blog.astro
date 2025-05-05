@@ -1,0 +1,304 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title="Blog | Analysta"
+  description="Latest insights and updates from Analysta on AI MVPs, custom MCP servers, and AI integration."
+>
+  <!-- Blog Header Section -->
+  <section class="pt-32 pb-16 md:pb-24 relative overflow-hidden">
+    <!-- Background Elements -->
+    <div
+      class="absolute inset-0 -z-10 bg-gradient-to-b from-background to-background/20 to-90%"
+    >
+    </div>
+
+    <!-- Floating Elements -->
+    <div
+      class="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-primary/5 blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-20 left-[10%] w-72 h-72 rounded-full bg-secondary/5 blur-3xl"
+    >
+    </div>
+
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center max-w-3xl mx-auto">
+        <div
+          class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4"
+        >
+          Latest Insights
+        </div>
+        <h1
+          class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 gradient-text"
+        >
+          Blog
+        </h1>
+        <p class="text-xl text-muted-foreground">
+          Expert insights and updates on agentic systems, custom MCP servers,
+          and AI productivity tools
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Post Section -->
+  <section class="pb-16">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="mb-8">
+        <div class="text-sm font-medium text-primary">Latest</div>
+      </div>
+
+      <!-- Featured Post -->
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-16 items-start">
+        <div class="lg:col-span-2 order-2 lg:order-1">
+          <div class="space-y-4">
+            <div class="text-primary">May 1, 2025</div>
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+              You Can Now Use Web Checkout in iOS Apps — Here's How
+            </h2>
+            <p class="text-lg text-muted-foreground">
+              Thanks to the Apple v. Epic ruling, developers can use external
+              payment links in your iOS app starting today...
+            </p>
+            <div class="flex items-center gap-3 pt-2">
+              <div class="flex-shrink-0">
+                <img
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  alt="Jordan Morgan"
+                  class="w-10 h-10 rounded-full object-cover"
+                />
+              </div>
+              <div>
+                <div class="font-medium">Jordan Morgan</div>
+                <div class="text-sm text-muted-foreground">
+                  Developer Advocate
+                </div>
+              </div>
+            </div>
+            <a
+              href="/blog/web-checkout-ios"
+              class="inline-flex items-center justify-center bg-primary/90 text-primary-foreground h-10 px-6 rounded-full hover:bg-primary transition-colors mt-2 shadow-lg shadow-primary/20 border border-primary/20"
+            >
+              Read More
+            </a>
+          </div>
+        </div>
+        <div
+          class="lg:col-span-3 order-1 lg:order-2 overflow-hidden rounded-xl"
+        >
+          <a href="/blog/web-checkout-ios" class="block group transition-all">
+            <div class="overflow-hidden rounded-xl">
+              <img
+                src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+                alt="iOS development image"
+                class="w-full h-auto rounded-xl object-cover aspect-[16/9] group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="relative py-6">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-border/60"></div>
+        </div>
+        <div class="relative flex justify-center">
+          <span class="bg-background px-4 text-sm text-muted-foreground"
+            >All Posts</span
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Posts Grid -->
+  <section class="pb-24">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Blog Post Card 1 -->
+        <div
+          class="group border border-border/50 rounded-xl overflow-hidden bg-background/50 transition-all hover:shadow-lg hover:-translate-y-1"
+        >
+          <a href="/blog/ios-subscription-product" class="block">
+            <div class="overflow-hidden aspect-video">
+              <img
+                src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80"
+                alt="iOS App Store"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="text-sm text-primary">May 1, 2025</div>
+              <h3 class="text-xl font-bold">
+                Creating, testing and releasing your first iOS subscription
+                product and app to the App Store
+              </h3>
+              <p class="text-muted-foreground">
+                From App Store Connect, to TestFlight and everything in-between,
+                follow this all-in-one...
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Blog Post Card 2 -->
+        <div
+          class="group border border-border/50 rounded-xl overflow-hidden bg-background/50 transition-all hover:shadow-lg hover:-translate-y-1"
+        >
+          <a href="/blog/apple-search-ads" class="block">
+            <div class="overflow-hidden aspect-video">
+              <img
+                src="https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80"
+                alt="Apple Search Ads"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="text-sm text-primary">April 28, 2025</div>
+              <h3 class="text-xl font-bold">
+                The Ultimate Guide on How to Set Up an Apple Search Ads Campaign
+                the Right Way
+              </h3>
+              <p class="text-muted-foreground">
+                When getting started with search ads, the setup can be
+                intimidating — but it's critical...
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Blog Post Card 3 -->
+        <div
+          class="group border border-border/50 rounded-xl overflow-hidden bg-background/50 transition-all hover:shadow-lg hover:-translate-y-1"
+        >
+          <a href="/blog/ai-mvp-development" class="block">
+            <div class="overflow-hidden aspect-video">
+              <img
+                src="https://images.unsplash.com/photo-1677442135726-98577806ed8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80"
+                alt="AI Development"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="text-sm text-primary">April 20, 2025</div>
+              <h3 class="text-xl font-bold">
+                Building Your First AI MVP: Best Practices and Common Pitfalls
+              </h3>
+              <p class="text-muted-foreground">
+                Learn how to rapidly develop and test an AI-powered minimum
+                viable product while avoiding common mistakes...
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Blog Post Card 4 -->
+        <div
+          class="group border border-border/50 rounded-xl overflow-hidden bg-background/50 transition-all hover:shadow-lg hover:-translate-y-1"
+        >
+          <a href="/blog/mcp-server-deployment" class="block">
+            <div class="overflow-hidden aspect-video">
+              <img
+                src="https://images.unsplash.com/photo-1633412802994-5c058f151b66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80"
+                alt="Server Deployment"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="text-sm text-primary">April 15, 2025</div>
+              <h3 class="text-xl font-bold">
+                A Comprehensive Guide to Deploying Custom MCP Servers
+              </h3>
+              <p class="text-muted-foreground">
+                Learn how to set up, configure, and optimize Model Control
+                Protocol servers for your AI applications...
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Blog Post Card 5 -->
+        <div
+          class="group border border-border/50 rounded-xl overflow-hidden bg-background/50 transition-all hover:shadow-lg hover:-translate-y-1"
+        >
+          <a href="/blog/ai-integration-workflow" class="block">
+            <div class="overflow-hidden aspect-video">
+              <img
+                src="https://images.unsplash.com/photo-1535551951406-a19828b0a76b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80"
+                alt="AI Integration"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="text-sm text-primary">April 10, 2025</div>
+              <h3 class="text-xl font-bold">
+                5 Ways to Seamlessly Integrate AI into Your Existing Workflows
+              </h3>
+              <p class="text-muted-foreground">
+                Discover practical strategies for introducing AI capabilities
+                without disrupting your team's productivity...
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Blog Post Card 6 -->
+        <div
+          class="group border border-border/50 rounded-xl overflow-hidden bg-background/50 transition-all hover:shadow-lg hover:-translate-y-1"
+        >
+          <a href="/blog/ai-employee-training" class="block">
+            <div class="overflow-hidden aspect-video">
+              <img
+                src="https://images.unsplash.com/photo-1577412647305-991150c7d163?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80"
+                alt="Employee Training"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="text-sm text-primary">April 5, 2025</div>
+              <h3 class="text-xl font-bold">
+                Effective Strategies for AI Tool Training in Your Organization
+              </h3>
+              <p class="text-muted-foreground">
+                A structured approach to upskilling your team and maximizing the
+                value of your AI investments...
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="flex justify-center mt-16">
+        <div class="max-w-2xl mx-auto text-center">
+          <h3 class="text-2xl font-bold gradient-text mb-4">
+            Want to Stay Updated?
+          </h3>
+          <p class="text-muted-foreground mb-6">
+            Subscribe to our newsletter to receive notifications when we publish
+            new articles.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="h-10 rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+            />
+            <button
+              class="inline-flex items-center justify-center bg-primary text-primary-foreground h-10 px-4 rounded-md hover:bg-primary/90 transition-colors"
+            >
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Any additional styles specific to the blog page */
+</style>

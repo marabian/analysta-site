@@ -1,0 +1,286 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
+
+// Define code snippets as strings to avoid execution
+const codeSnippet1 = `// Example code for generating a deep link to web checkout
+let webCheckoutURL = URL(string: "https://pay.yourapp.com/checkout?plan=monthly&user=userID")!`;
+
+const codeSnippet2 = `// Example button implementation
+let webCheckoutButton = UIButton(type: .system)
+webCheckoutButton.setTitle("Save 30% Online", for: .normal)
+webCheckoutButton.addTarget(self, action: #selector(openWebCheckout), for: .touchUpInside)
+paywallView.addSubview(webCheckoutButton)
+
+@objc func openWebCheckout() {
+    // Open the URL using appropriate method
+    UIApplication.shared.open(webCheckoutURL)
+}`;
+
+const codeSnippet3 = `// Check if user is in the United States
+let locale = Locale.current
+let isUSUser = locale.regionCode == "US"
+
+// Only show web checkout button to US users
+webCheckoutButton.isHidden = !isUSUser`;
+---
+
+<MainLayout 
+  title="You Can Now Use Web Checkout in iOS Apps — Here's How | Analysta Blog" 
+  description="Thanks to the Apple v. Epic ruling, developers can use external payment links in iOS apps. Learn how to implement web checkout in your iOS app."
+>
+  <!-- Blog Post Header -->
+  <section class="pt-32 pb-10 md:pb-16 relative overflow-hidden">
+    <!-- Background Elements -->
+    <div
+      class="absolute inset-0 -z-10 bg-gradient-to-b from-background to-background/20 to-90%"
+    >
+    </div>
+
+    <!-- Floating Elements -->
+    <div
+      class="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-primary/5 blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-20 left-[10%] w-72 h-72 rounded-full bg-secondary/5 blur-3xl"
+    >
+    </div>
+
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="flex flex-col items-center">
+        <a 
+          href="/blog" 
+          class="flex items-center text-primary mb-6 hover:underline self-start"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+          </svg>
+          Back to Blog
+        </a>
+        
+        <div class="max-w-4xl mx-auto text-center mb-8">
+          <h1
+            class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 gradient-text"
+          >
+            You Can Now Use Web Checkout in iOS Apps — Here's How
+          </h1>
+        </div>
+        
+        <div class="flex items-center gap-4 mb-10">
+          <div class="flex-shrink-0">
+            <img 
+              src="https://randomuser.me/api/portraits/men/32.jpg" 
+              alt="Jordan Morgan" 
+              class="w-12 h-12 rounded-full object-cover"
+            />
+          </div>
+          <div class="text-left">
+            <div class="font-medium">Jordan Morgan</div>
+            <div class="text-sm text-muted-foreground flex items-center">
+              <span>Developer Advocate</span>
+              <span class="mx-2">•</span>
+              <span>May 1, 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Image -->
+  <section class="pb-16">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="rounded-xl overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            alt="iOS App Store development"
+            class="w-full h-auto object-cover aspect-[21/9]"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Content -->
+  <section class="pb-24">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="max-w-3xl mx-auto">
+        <article class="prose prose-lg dark:prose-invert max-w-none">
+          <p>I'll keep it short: due to the Apple vs Epic injunction, developers can offer links to external payments from within their app. <strong>That means, starting today in the United States, developers can use Superwall's web checkout links from their apps.</strong> Launch them from a paywall, some view within settings — anywhere!</p>
+          
+          <p>The best part? Superwall is already built for this. There are no updates or features required on our side, or any updates you'll need to ship on your side if you've set up web checkout.</p>
+          
+          <h2>What you need to know, and how to get started right now</h2>
+          
+          <ul>
+            <li><strong>Zero commission:</strong> Apple can't charge a 27% cut or audit your web payments.</li>
+            <li><strong>No entitlements:</strong> You don't need Apple's approval to add a checkout link.</li>
+            <li><strong>No UI restrictions:</strong> Style your button however you want, and place it anywhere — even next to Apple's own IAP.</li>
+            <li><strong>No app update required:</strong> If you're on Superwall SDK 4.2.0+, you can deep link to a web checkout without shipping a new build.</li>
+            <li><strong>Live now in the United States:</strong> The injunction is already in effect. Apple says it'll comply while appealing. All you need to do is add a web checkout link either on a paywall or in your app, and you can use this filter to ensure it only shows in the United States.</li>
+          </ul>
+          
+          <h2>Implementing web checkout in your iOS app</h2>
+          
+          <p>The implementation process is straightforward, especially if you're already using a payment platform that supports web checkout. Here's how to add it to your iOS app:</p>
+          
+          <h3>1. Create your payment link</h3>
+          
+          <p>First, you'll need to generate a web checkout link. If you're using Superwall, you can do this through their dashboard or API. The link should direct users to a secure payment page where they can complete their purchase.</p>
+          
+          <CodeBlock code={codeSnippet1} language="swift" />
+          
+          <h3>2. Add the checkout button to your app</h3>
+          
+          <p>Next, add a button to your paywall or settings screen that will open the web checkout. Apple now allows these buttons to be placed anywhere in your app, including directly next to IAP options.</p>
+          
+          <CodeBlock code={codeSnippet2} language="swift" />
+          
+          <h3>3. Filter availability by region</h3>
+          
+          <p>Since this ruling currently only applies to the United States, you'll want to show the web checkout option only to users in that region. You can implement region detection in your app to conditionally display the button.</p>
+          
+          <CodeBlock code={codeSnippet3} language="swift" />
+          
+          <h2>Benefits of implementing web checkout</h2>
+          
+          <p>Adding web checkout to your iOS app offers several advantages:</p>
+          
+          <ul>
+            <li><strong>Higher revenue:</strong> Without Apple's 30% commission, you keep more of what your customers pay.</li>
+            <li><strong>Price flexibility:</strong> You can offer different pricing on the web versus in-app purchases.</li>
+            <li><strong>Direct customer relationship:</strong> Get direct access to customer data and payment information.</li>
+            <li><strong>Simplified refunds:</strong> Process refunds directly without going through Apple.</li>
+          </ul>
+          
+          <blockquote>
+            <p>"This ruling represents a significant shift in the App Store ecosystem. Developers now have more freedom to design their monetization strategy and build direct relationships with their customers."</p>
+          </blockquote>
+          
+          <h2>Next steps</h2>
+          
+          <p>As this ruling is still new, the landscape may continue to evolve. Here are some recommendations for moving forward:</p>
+          
+          <ol>
+            <li>Implement web checkout as soon as possible to take advantage of this opportunity.</li>
+            <li>Monitor your analytics to compare conversion rates between in-app purchases and web checkout.</li>
+            <li>Stay informed about any changes to Apple's policies regarding external payment links.</li>
+            <li>Consider offering special promotions for web checkout to incentivize users to purchase through this channel.</li>
+          </ol>
+          
+          <p>If you need help implementing web checkout in your iOS app or have questions about optimizing your monetization strategy, don't hesitate to <a href="#contact">contact our team</a>. We're here to help you navigate this new opportunity and maximize your app's revenue potential.</p>
+        </article>
+        
+        <!-- Tags -->
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">iOS Development</span>
+          <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">App Store</span>
+          <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Monetization</span>
+          <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">Web Checkout</span>
+        </div>
+        
+        <!-- Share -->
+        <div class="mt-8 pt-8 border-t border-border/50">
+          <div class="flex items-center justify-between">
+            <div class="text-lg font-semibold">Share this article</div>
+            <div class="flex gap-4">
+              <a href="#" class="text-muted-foreground hover:text-primary" aria-label="Share on Twitter">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15"></path>
+                </svg>
+              </a>
+              <a href="#" class="text-muted-foreground hover:text-primary" aria-label="Share on LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"></path>
+                </svg>
+              </a>
+              <a href="#" class="text-muted-foreground hover:text-primary" aria-label="Share via Email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Related Posts -->
+        <div class="mt-16">
+          <h3 class="text-2xl font-bold mb-8">Related Posts</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Related Post 1 -->
+            <div class="group border border-border/50 rounded-xl overflow-hidden bg-background/50 transition-all hover:shadow-lg hover:-translate-y-1">
+              <a href="/blog/ios-subscription-product" class="block">
+                <div class="overflow-hidden aspect-video">
+                  <img
+                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80"
+                    alt="iOS App Store"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div class="p-6 space-y-2">
+                  <div class="text-sm text-primary">May 1, 2025</div>
+                  <h3 class="text-lg font-bold line-clamp-2">Creating, testing and releasing your first iOS subscription product</h3>
+                </div>
+              </a>
+            </div>
+            
+            <!-- Related Post 2 -->
+            <div class="group border border-border/50 rounded-xl overflow-hidden bg-background/50 transition-all hover:shadow-lg hover:-translate-y-1">
+              <a href="/blog/apple-search-ads" class="block">
+                <div class="overflow-hidden aspect-video">
+                  <img
+                    src="https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80"
+                    alt="Apple Search Ads"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div class="p-6 space-y-2">
+                  <div class="text-sm text-primary">April 28, 2025</div>
+                  <h3 class="text-lg font-bold line-clamp-2">The Ultimate Guide on How to Set Up an Apple Search Ads Campaign</h3>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Add Tailwind's prose styles to make article content look good */
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    @apply font-bold gradient-text;
+  }
+  
+  .prose a {
+    @apply text-primary hover:text-primary/80 no-underline hover:underline transition-colors;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-primary/30 bg-primary/5 px-4 py-2 rounded-r-md;
+  }
+  
+  .prose pre {
+    @apply bg-background rounded-md shadow-sm border border-border/50 overflow-x-auto;
+  }
+  
+  .prose code {
+    @apply bg-background/70 px-1 py-0.5 rounded text-sm;
+  }
+  
+  .prose pre code {
+    @apply bg-transparent px-0 py-0;
+  }
+  
+  .prose img {
+    @apply rounded-md;
+  }
+  
+  .prose ul, .prose ol {
+    @apply my-4;
+  }
+</style>

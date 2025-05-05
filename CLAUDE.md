@@ -10,6 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Astro CLI: `npm run astro -- <command>` (e.g., astro add, astro check)
 
 ## Code Style
+- Always put file path at top
 - **TypeScript**: Use strict typing with Astro's TypeScript configuration
 - **Components**: 
   - React components use .tsx extension with functional component pattern
@@ -20,9 +21,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Formatting**: Follow existing indentation (2 spaces) and line breaks
 - **Error Handling**: Use try/catch for async operations, null checks for optional values
 - **Theme**: Support light/dark modes using theme-provider.tsx system
+- **Navigation**: Use conditional paths for navigation links to handle both homepage and other pages
+  - Format: `href={Astro.url.pathname === "/" ? "#section" : "/#section"}`
+- **Blog Posts**: Use CodeBlock component for code snippets in blog posts to avoid execution issues
+- Always put docstrings for JavaScript/TypeScript functions
 
 ## Project Structure
 - `/src/components`: Reusable UI components (.astro or .tsx)
 - `/src/layouts`: Page layout templates
 - `/src/pages`: Route-based page components
+  - `/src/pages/blog`: Blog post pages
 - `/src/styles`: Global CSS and Tailwind configuration
